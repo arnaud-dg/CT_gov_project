@@ -17,4 +17,4 @@ data = pd.read_csv(io.StringIO(res.decode("utf-8")), skiprows=10).fillna(0)
 data = pd.read_csv(io.StringIO(res.decode("utf-8")))
 
 st.header("Tableau de données")
-st.dataframe(data)
+st.dataframe(data) 
