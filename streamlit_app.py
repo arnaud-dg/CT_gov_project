@@ -7,7 +7,7 @@ import altair as alt
 disease = "parkinson"
 min_value = 1
 max_value = 5
-url = "https://clinicaltrials.gov/api/query/study_fields?expr=" + disease + "&min_rnk=" + min_value + "&max_rnk=" + max_value + "&fmt=csv"
+url = "https://clinicaltrials.gov/api/query/study_fields?expr=" + disease + "&min_rnk=" + str(min_value) + "&max_rnk=" + str(max_value) + "&fmt=csv"
 streamlit.text(url)
 
 stramlit.stop()
