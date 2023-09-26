@@ -21,7 +21,7 @@ st.dataframe(data)
 
 st.title('🦜🔗 Quickstart App')
 
-openai_api_key = st.sidebar.text_input('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', type='password')
+openai_api_key = st.sidebar.text_input('OpenAI API Key', type='password')
 
 def generate_response(input_text):
     llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
