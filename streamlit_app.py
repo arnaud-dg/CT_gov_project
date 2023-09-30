@@ -1,21 +1,19 @@
-import requests, io
 import pandas as pd
 import streamlit as st
-import altair as alt
-from langchain.llms import OpenAI
 import snowflake.connector
 
-# Send and retrieve HTTP (REST) request
-disease = "parkinson"
-min_value = 1
-max_value = 5
-url = "https://clinicaltrials.gov/api/query/full_studies?expr=" + disease + "&min_rnk=" + str(min_value) + "&max_rnk=" + str(max_value) + "&fmt=csv"
-st.text(url)
+my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+my_cur = my_cnx.cursor()
+my_cur.execute("select * from available_diseases")
+my_data_row = my_cur.fetchone()
+streamlit.text("Hello from Snowflake:")
+streamlit.text(my_data_row)
 
-res = requests.get(url).content
 
-# Extract contents, skip CSV header (first 10 lines), to dataframe
-data = pd.read_csv(io.StringIO(res.decode("utf-8")))
+# Using object notation
+add_selectbox = st.sidebar.selectbox(
+    "Please select a disease :", my_data_row
+)
 
 st.header("Tableau de données")
 st.dataframe(data) 
