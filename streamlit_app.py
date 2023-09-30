@@ -17,7 +17,7 @@ def fetch_data(SQL_query):
 df = fetch_data("select $1 from available_diseases")
 disease_list = []
 for row in df.itertuples():
-    disease_list.append(row[0])
+    disease_list.append(row[1])
     
 # Using object notation
 add_selectbox = st.sidebar.selectbox(
