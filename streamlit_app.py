@@ -3,6 +3,7 @@ import pandas as pd
 import streamlit as st
 import altair as alt
 from langchain.llms import OpenAI
+import snowflake.connector
 
 # Send and retrieve HTTP (REST) request
 disease = "parkinson"
