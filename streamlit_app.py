@@ -4,7 +4,7 @@ import snowflake.connector
 
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
-my_cur.execute("select * from available_diseases")
+my_cur.execute("select $1 from available_diseases")
 my_data_row = my_cur.fetchone()
 
 
