@@ -24,7 +24,7 @@ selected_disease = st.sidebar.selectbox(
     "Please select a disease :", disease_list
 )
 
-query = f'select NCTID from MASTER_DATA WHERE disease = {selected_disease} LIMIT 10'
+query = "select NCTID from MASTER_DATA WHERE disease = " + selected_disease + " LIMIT 10"
 data = fetch_data(query)
 
 st.title('🦜🔗 Quickstart App')
