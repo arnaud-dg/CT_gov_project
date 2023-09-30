@@ -24,7 +24,7 @@ add_selectbox = st.sidebar.selectbox(
     "Please select a disease :", disease_list
 )
 
-df = fetch_data("select NCTID from MASTER_DATA WHERE disease = 'parkinson' LIMIT 10;")
+df = fetch_data("select NCTID from MASTER_DATA WHERE disease = 'parkinson' LIMIT 10")
 
 st.title('🦜🔗 Quickstart App')
 st.dataframe(data)
