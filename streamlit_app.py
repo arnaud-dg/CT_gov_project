@@ -5,11 +5,15 @@ import snowflake.connector
 my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 my_cur.execute("select $1 from available_diseases")
-my_data_row = my_cur.fetchone()
+df = my_cur.fetchone()
 
+disease_list = []
+for row in df.itertuples():
+    disease_list.append(row)
+    
 # Using object notation
 add_selectbox = st.sidebar.selectbox(
-    "Please select a disease :", my_data_row
+    "Please select a disease :", disease_list
 )
 
 st.title('🦜🔗 Quickstart App')
