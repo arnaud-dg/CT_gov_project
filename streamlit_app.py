@@ -2,22 +2,19 @@ import pandas as pd
 import streamlit as st
 import snowflake.connector
 
-my_cnx = snowflake.connector.connect(**st.secrets["snowflake"])
-my_cur = my_cnx.cursor()
-my_cur.execute("select $1 from available_diseases")
-df = my_cur.fetchone()
+def fetch_data(SQL_query):
+    # Connection to snowflake and cursor creation
+    conn = snowflake.connector.connect(**st.secrets["snowflake"])
+    cur = conn.cursor()
+    cur.execute(SQL_query)
+    # Loading Data into a DataFrame
+    df = pd.DataFrame.from_records(iter(cur), columns=[x[0] for x in cur.description])
+    # Close the connection
+    cur.close()
+    conn.close()
+    return df
 
-# Initialize connection.
-conn = st.experimental_connection('snowpark')
-
-# Load the table as a dataframe using the Snowpark Session.
-@st.cache_data
-def load_table(table_name):
-    with conn.safe_session() as session:
-        return session.table(table_name).to_pandas()
-
-df = load_table("available_diseases")
-
+df = fetch_data("select $1 from available_diseases")
 disease_list = []
 for row in df.itertuples():
     disease_list.append(row)
