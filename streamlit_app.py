@@ -25,4 +25,4 @@ add_selectbox = st.sidebar.selectbox(
 )
 
 st.title('🦜🔗 Quickstart App')
-sf.dataframe(df)
+st.dataframe(df)
