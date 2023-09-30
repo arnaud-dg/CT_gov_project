@@ -20,11 +20,11 @@ for row in df.itertuples():
     disease_list.append(row[1])
     
 # Using object notation
-add_selectbox = st.sidebar.selectbox(
+selected_disease = st.sidebar.selectbox(
     "Please select a disease :", disease_list
 )
 
-data = fetch_data("select NCTID from MASTER_DATA WHERE disease = 'parkinson' LIMIT 10")
+data = fetch_data("select NCTID from MASTER_DATA WHERE disease = " + selected_disease + " LIMIT 10")
 
 st.title('🦜🔗 Quickstart App')
 st.dataframe(data)
