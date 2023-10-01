@@ -3,14 +3,6 @@ import streamlit as st
 import snowflake.connector
 import altair as alt
 
-st.markdown("""
-    <style>
-        .reportview-container .main .block-container {
-            max-width: 90%;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
 # Importing function
 def fetch_data(SQL_query):
     # Connection to snowflake and cursor creation
