@@ -5,3 +5,4 @@ langchain
 snowflake-connector-python
 plotly-express
 plotly
+leafmap
