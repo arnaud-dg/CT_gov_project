@@ -27,7 +27,7 @@ df_countries = df_countries[df_countries['DISEASE'] == selected_disease]
 
 st.title('🏥 World map of clinical studies 🧑‍⚕️')
 
-tab1, tab2 = st.tabs(["Worldmap by countries", "Sites Heatmap""])
+tab1, tab2 = st.tabs(["Worldmap by countries", "Sites Heatmap"])
 
 with tab1:
     fig = px.choropleth(df_countries, locations="COUNTRY_CODE_ISO",
