@@ -53,7 +53,6 @@ with tab2:
         latitude="LATITUDE",
         longitude="LONGITUDE",
         value="VALUE",
-        name="Heat map",
         radius=20,
     )
     m.to_streamlit(height=700)
