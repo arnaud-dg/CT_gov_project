@@ -26,7 +26,7 @@ st.sidebar.write("Vous avez choisi : ", selected_disease)
 df_countries = fetch_data("SELECT * FROM country_map")
 df_countries = df_countries[df_countries['DISEASE'] == selected_disease]
 df_sites = fetch_data("SELECT * FROM studies_sites")
-df_sites['value'] = 1
+df_sites['VALUE'] = 1
 df_sites = df_sites[df_sites['DISEASE'] == selected_disease]
 
 st.title('🏥 World map of clinical studies 🧑‍⚕️')
@@ -48,9 +48,9 @@ with tab2:
     m = leafmap.Map(center=[40, -100], zoom=4, tiles="stamentoner")
     m.add_heatmap(
         df_sites,
-        latitude="latitude",
-        longitude="longitude",
-        value="value",
+        latitude="LATITUDE",
+        longitude="LONGITUDE",
+        value="VALUE",
         name="Heat map",
         radius=20,
     )
