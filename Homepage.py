@@ -23,8 +23,8 @@ st.sidebar.write("Vous avez choisi : ", selected_disease)
 
 # Dashboard - Big numbers & Metrics
 df_metrics = fetch_data("SELECT * FROM studies_count")
-st.dataframe(df_metrics)
-df_metrics = df_metrics[df_metrics['disease'] == seleccted_disease]
+
+df_metrics = df_metrics[df_metrics['disease'] == selected_disease]
 st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Total number of studies", df_metrics['Count'].sum())
@@ -32,4 +32,4 @@ col2.metric("On-going Clinical studies", df_metrics[df_metrics['simplifiedstatus
 col3.metric("Completed Clinical studies", df_metrics[df_metrics['simplifiedstatus'] == 'Closed'])
 col4.metric("Number of lines", df_metrics[df_metrics['simplifiedstatus'] == 'Unknown'])
 
-
+st.dataframe(df_metrics)
