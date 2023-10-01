@@ -33,7 +33,7 @@ st.dataframe(df_nlp)
 
 # Create some sample text
 text = ' '.join(df_nlp['Text_field'])
-text = text.split(" ")
+st.write(text[:100])
 
 # Create and generate a word cloud image:
 wordcloud = WordCloud().generate(text)
