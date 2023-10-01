@@ -37,7 +37,7 @@ df = fetch_data("SELECT count(*) FROM studies_count WHERE disease = '" + selecte
 
 st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Total number of studies", df.iloc[0, 0])
+col1.metric("Total number of studies", fetch_data("SELECT count(*) FROM studies_count WHERE disease = '" + selected_disease + "'").iloc[0, 0])
 col2.metric("On-going Clinical studies", "0 mph", "-8%")
 col3.metric("Completed Clinical studies", "86%", "4%")
 col4.metric("Number of lines", "86%", "4%")
