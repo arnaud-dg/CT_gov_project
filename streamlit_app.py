@@ -19,6 +19,8 @@ def fetch_data(SQL_query):
 # Drop-down list of the sidebar
 df_disease = fetch_data("select $1 from available_diseases")
 selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease['$1'].tolist())
+st.sidebar.write("Vous avez choisi : ", selected_disease)
+
 
 query = "select NCTID from MASTER_DATA WHERE disease = " + selected_disease + " LIMIT 10"
 data = fetch_data(query)
