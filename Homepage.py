@@ -42,4 +42,4 @@ col2.metric("On-going Clinical studies", "0 mph", "-8%")
 col3.metric("Completed Clinical studies", "86%", "4%")
 col4.metric("Number of lines", "86%", "4%")
 
-st.dataframe(df['total][0])
+st.dataframe(df['total'][0])
