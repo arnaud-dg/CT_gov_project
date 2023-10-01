@@ -27,13 +27,13 @@ selected_disease = st.sidebar.selectbox(
     "Please select a disease :", disease_list
 )
 
-query = "select NCTID from MASTER_DATA WHERE disease = " + selected_disease + " LIMIT 10"
-data = fetch_data(query)
+# query = "select NCTID from MASTER_DATA WHERE disease = " + selected_disease + " LIMIT 10"
+# data = fetch_data(query)
 
-st.title('🦜🔗 Quickstart App')
-col1, col2, col3 = st.columns(3)
-col1.metric("Total number of studies", "70 °F", "1.2 °F")
-col2.metric("On-going Clinical studies", "9 mph", "-8%")
-col3.metric("Completed Clinical studies", "86%", "4%")
+# st.title('🦜🔗 Quickstart App')
+# col1, col2, col3 = st.columns(3)
+# col1.metric("Total number of studies", "70 °F", "1.2 °F")
+# col2.metric("On-going Clinical studies", "9 mph", "-8%")
+# col3.metric("Completed Clinical studies", "86%", "4%")
 
 st.dataframe(df)
