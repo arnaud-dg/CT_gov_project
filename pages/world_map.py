@@ -57,10 +57,10 @@ with tab2:
     m.to_streamlit(height=700)
 
 with tab3:
-    m2 = leafmap.Map(center=[0, 0], zoom=2, tiles="stamentoner")
-    m2.add_markers_from_xy(
-        df_sites,
-        y="LATITUDE",
-        x="LONGITUDE"
-    )
-    m2.to_streamlit(height=700)
+    # m2 = leafmap.Map(center=[0, 0], zoom=2, tiles="stamentoner")
+    # m2.add_markers_from_xy(
+    #     df_sites,
+    #     y="LATITUDE",
+    #     x="LONGITUDE"
+    # )
+    # m2.to_streamlit(height=700)
