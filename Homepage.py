@@ -40,4 +40,3 @@ col2.metric("On-going Clinical studies", fetch_data("SELECT count(*) FROM studie
 col3.metric("Completed Clinical studies", fetch_data("SELECT count(*) FROM studies_count WHERE disease = '" + selected_disease + "' AND simplifiedstatus = 'Closed'").iloc[0, 0])
 col4.metric("Number of lines", fetch_data("SELECT count(*) FROM studies_count WHERE disease = '" + selected_disease + "' AND simplifiedstatus = 'Unknown'").iloc[0, 0])
 
-st.dataframe(df)
