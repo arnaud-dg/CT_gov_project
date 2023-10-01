@@ -32,7 +32,7 @@ st.header('Text analysis of the Study Description')
 st.dataframe(df_nlp)
 
 # Create some sample text
-text = ' '.join(df_nlp['Text_field'])
+text = df_nlp['Text_field'].str.cat(sep=' ')
 st.write(text[:100])
 
 # Create and generate a word cloud image:
