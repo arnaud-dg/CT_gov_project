@@ -22,7 +22,7 @@ selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease[
 st.sidebar.write("Vous avez choisi : ", selected_disease)
 
 
-query = "select NCTID from MASTER_DATA WHERE disease = 'parkinson' LIMIT 10"
+query = "select NCTID from MASTER_DATA WHERE disease = '" + selected_disease + "' LIMIT 10"
 data = fetch_data(query)
 
 st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
