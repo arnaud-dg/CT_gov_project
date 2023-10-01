@@ -25,8 +25,13 @@ st.sidebar.write("Vous avez choisi : ", selected_disease)
 
 df_countries = fetch_data("SELECT * FROM country_map")
 df_countries = df_countries[df_countries['DISEASE'] == selected_disease]
+df_sites = fetch_data("SELECT * FROM studies_sites")
+df_sites['value'] = 1
+df_sites = df_countries[df_countries['DISEASE'] == selected_disease]
 
 st.title('🏥 World map of clinical studies 🧑‍⚕️')
+
+st.dataframe(df_sites)
 
 tab1, tab2 = st.tabs(["Worldmap by countries", "Sites Heatmap"])
 
@@ -40,10 +45,13 @@ with tab1:
     st.plotly_chart(fig)
 
 with tab2:
-    fig = px.choropleth(df_countries, locations="COUNTRY_CODE_ISO",
-                        color="NUMBER_STUDIES", # lifeExp is a column of gapminder
-                        hover_name="LOCATIONCOUNTRY", # column to add to hover information
-                        color_continuous_scale=px.colors.sequential.Plasma)
-    fig.update_layout(mapbox_style="open-street-map")
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-    st.plotly_chart(fig)
+    m = leafmap.Map(center=[40, -100], zoom=4, tiles="stamentoner")
+    m.add_heatmap(
+        df_sites,
+        latitude="latitude",
+        longitude="longitude",
+        value="value",
+        name="Heat map",
+        radius=20,
+    )
+    m.to_streamlit(height=700)
