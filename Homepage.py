@@ -21,12 +21,11 @@ df_disease = fetch_data("select $1 from available_diseases")
 selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease['$1'].tolist())
 st.sidebar.write("Vous avez choisi : ", selected_disease)
 
+st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
+
 # Dashboard - Big numbers & Metrics
 df_metrics = fetch_data("SELECT * FROM studies_count")
-st.dataframe(df_metrics)
 df_metrics = df_metrics[df_metrics['DISEASE'] == selected_disease]
-
-st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Total number of studies", df_metrics['COUNT'].sum())
 col2.metric("On-going Clinical studies", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'On-going']['COUNT'].sum())
