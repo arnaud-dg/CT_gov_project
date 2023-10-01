@@ -30,8 +30,12 @@ st.dataframe(df_delay)
 col1, col2 = st.st.columns(2)
 
 with col1:
-  fig1 = px.histogram(df_delay, x="total_bill", y="tip", color="sex",
+    fig1 = px.histogram(df_delay, x="total_bill", y="tip", color="sex",
                    marginal="box", # or violin, rug
                    hover_data=df.columns)
-  st.plotly(fig1)
+    st.plotly(fig1)
 with col2:
+    fig1 = px.histogram(df_delay, x="total_bill", y="tip", color="sex",
+                   marginal="box", # or violin, rug
+                   hover_data=df.columns)
+    st.plotly(fig1)
