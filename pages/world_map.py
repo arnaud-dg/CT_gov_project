@@ -26,8 +26,8 @@ st.sidebar.write("Vous avez choisi : ", selected_disease)
 df_countries = fetch_data("SELECT * FROM country_map")
 df_countries = df_countries[df_countries['DISEASE'] == selected_disease]
 df_sites = fetch_data("SELECT * FROM studies_sites")
-df_sites['LATITUDE'] = df_sites['LATITUDE'].astype(str)
-df_sites['LONGITUDE'] = df_sites['LONGITUDE'].astype(str)
+df_sites['LATITUDE'] = df_sites['LATITUDE'].astype(float)
+df_sites['LONGITUDE'] = df_sites['LONGITUDE'].astype(float)
 df_sites['VALUE'] = 1
 df_sites = df_sites[df_sites['DISEASE'] == selected_disease]
 
