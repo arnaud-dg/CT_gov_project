@@ -32,5 +32,5 @@ col1, col2 = st.columns(2)
 fig1 = px.histogram(df_delay, x="DELAY_START_PRIMARY")
 fig2 = px.histogram(df_delay, x="DELAY_PRIMARY_COMPLETE")
 
-col1.plotly(fig1)
-col2.plotly(fig2)
+col1.plotly_chart(fig1)
+col2.plotly_chart(fig2)
