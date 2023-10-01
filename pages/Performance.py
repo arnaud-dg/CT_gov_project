@@ -29,8 +29,8 @@ st.header('Focus on classical delays')
 st.dataframe(df_delay)
 col1, col2 = st.columns(2)
 
-fig1 = px.histogram(df_delay, x="DELAY_START_PRIMARY", y=1, marginal="box")
-fig2 = px.histogram(df_delay, x="DELAY_PRIMARY_COMPLETE", y=1, marginal="box")
+fig1 = px.histogram(df_delay, x="DELAY_START_PRIMARY")
+fig2 = px.histogram(df_delay, x="DELAY_PRIMARY_COMPLETE")
 
 col1.plotly(fig1)
 col2.plotly(fig2)
