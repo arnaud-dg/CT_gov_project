@@ -27,7 +27,7 @@ df_delay = df_delay[df_delay['DISEASE'] == selected_disease]
 
 st.header('Focus on classical delays')
 st.dataframe(df_delay)
-col1, col2 = st.st.columns(2)
+col1, col2 = st.columns(2)
 
 with col1:
     fig1 = px.histogram(df_delay, x="DELAY_START_PRIMARY", y=1, marginal="box")
