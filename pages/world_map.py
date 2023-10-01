@@ -29,7 +29,7 @@ st.title('🏥 World map of clinical studies 🧑‍⚕️')
 
 st.dataframe(df_countries)
 
-fig = px.choropleth(df_countries, locations="COUNTRY_CODE",
+fig = px.choropleth(df_countries, locations="COUNTRY_CODE_ISO",
                     color="NUMBER_STUDIES", # lifeExp is a column of gapminder
                     hover_name="LOCATIONCOUNTRY", # column to add to hover information
                     color_continuous_scale=px.colors.sequential.Plasma)
