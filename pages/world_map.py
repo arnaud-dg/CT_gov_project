@@ -57,6 +57,6 @@ with tab2:
         latitude="LATITUDE",
         longitude="LONGITUDE",
         value="VALUE",
-        radius=5,
+        radius=10,
     )
     m.to_streamlit(height=700)
