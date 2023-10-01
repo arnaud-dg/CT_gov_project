@@ -39,7 +39,7 @@ st.dataframe(df_sites)
 st.echo(df_sites.info())
 
 
-tab1, tab2 = st.tabs(["Worldmap by countries", "Sites Heatmap"])
+tab1, tab2, tab3 = st.tabs(["Worldmap by countries", "Sites heatmap", "Sites detailed view"])
 
 with tab1:
     fig = px.choropleth(df_countries, locations="COUNTRY_CODE_ISO",
@@ -60,3 +60,12 @@ with tab2:
         radius=10,
     )
     m.to_streamlit(height=700)
+
+with tab3:
+    m2 = leafmap.Map(center=[0, 0], zoom=2, tiles="stamentoner")
+    m2.add_markers_from_xy(
+        df_sites,
+        y="LATITUDE",
+        x="LONGITUDE"
+    )
+    m2.to_streamlit(height=700)
