@@ -3,6 +3,7 @@ import streamlit as st
 import snowflake.connector
 import altair as alt
 import plotly.express as px
+import leafmap.foliumap as leafmap
 
 # Importing function
 def fetch_data(SQL_query):
