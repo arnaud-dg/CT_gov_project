@@ -18,7 +18,7 @@ def fetch_data(SQL_query):
     cur.close()
     conn.close()
     return df
-
+ 
 # Drop-down list of the sidebar
 df_disease = fetch_data("select $1 from available_diseases")
 selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease['$1'].tolist())
