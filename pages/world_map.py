@@ -27,12 +27,22 @@ df_countries = df_countries[df_countries['DISEASE'] == selected_disease]
 
 st.title('🏥 World map of clinical studies 🧑‍⚕️')
 
-st.dataframe(df_countries)
+tab1, tab2 = st.tabs(["Worldmap by countries", "Sites Heatmap""])
 
-fig = px.choropleth(df_countries, locations="COUNTRY_CODE_ISO",
-                    color="NUMBER_STUDIES", # lifeExp is a column of gapminder
-                    hover_name="LOCATIONCOUNTRY", # column to add to hover information
-                    color_continuous_scale=px.colors.sequential.Plasma)
-fig.update_layout(mapbox_style="open-street-map")
-fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-st.plotly_chart(fig)
+with tab1:
+    fig = px.choropleth(df_countries, locations="COUNTRY_CODE_ISO",
+                        color="NUMBER_STUDIES", # lifeExp is a column of gapminder
+                        hover_name="LOCATIONCOUNTRY", # column to add to hover information
+                        color_continuous_scale=px.colors.sequential.Plasma)
+    fig.update_layout(mapbox_style="open-street-map")
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    st.plotly_chart(fig)
+
+with tab2:
+    fig = px.choropleth(df_countries, locations="COUNTRY_CODE_ISO",
+                        color="NUMBER_STUDIES", # lifeExp is a column of gapminder
+                        hover_name="LOCATIONCOUNTRY", # column to add to hover information
+                        color_continuous_scale=px.colors.sequential.Plasma)
+    fig.update_layout(mapbox_style="open-street-map")
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    st.plotly_chart(fig)
