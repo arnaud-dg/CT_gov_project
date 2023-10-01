@@ -46,7 +46,7 @@ with tab1:
     st.plotly_chart(fig)
 
 with tab2:
-    m = leafmap.Map(center=[0, 0], zoom=2, tiles="stamentoner")
+    m = leafmap.Map(center=[0, 0], zoom=2, tiles="Mapbox Bright")
     m.add_heatmap(
         df_sites,
         latitude="LATITUDE",
@@ -57,7 +57,7 @@ with tab2:
     m.to_streamlit(height=700)
 
 with tab3:
-    m2 = leafmap.Map(center=[0, 0], zoom=2, tiles="stamentoner")
+    m2 = leafmap.Map(center=[0, 0], zoom=2, tiles="Mapbox Bright")
     m2.add_points_from_xy(
         df_sites,
         y="LATITUDE",
