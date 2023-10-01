@@ -17,23 +17,16 @@ def fetch_data(SQL_query):
     return df
 
 # Drop-down list of the sidebar
-df = fetch_data("select $1 from available_diseases")
-disease_list = []
-for row in df.itertuples():
-    disease_list.append(row[1])
-    
-# Using object notation
-selected_disease = st.sidebar.selectbox(
-    "Please select a disease :", df['$1'].tolist()
-)
+df_disease = fetch_data("select $1 from available_diseases")
+selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease['$1'].tolist())
 
-# query = "select NCTID from MASTER_DATA WHERE disease = " + selected_disease + " LIMIT 10"
-# data = fetch_data(query)
+query = "select NCTID from MASTER_DATA WHERE disease = " + selected_disease + " LIMIT 10"
+data = fetch_data(query)
 
-# st.title('🦜🔗 Quickstart App')
+st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
 # col1, col2, col3 = st.columns(3)
 # col1.metric("Total number of studies", "70 °F", "1.2 °F")
 # col2.metric("On-going Clinical studies", "9 mph", "-8%")
 # col3.metric("Completed Clinical studies", "86%", "4%")
 
-st.dataframe(df)
+st.dataframe(data)
