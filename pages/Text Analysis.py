@@ -26,12 +26,13 @@ st.sidebar.write("Vous avez choisi : ", selected_disease)
 
 df_nlp = fetch_data("SELECT * FROM master_data")
 df_nlp = df_nlp[df_nlp['DISEASE'] == selected_disease]
+df_nlp['Text_field'] = df_nlp['OFFICIALTITLE'] + df_nlp['BRIEFSUMMARY'] + df_nlp['DETAILEDDESCRIPTION']
 
 st.header('Text analysis of the Study Description')
 st.dataframe(df_nlp)
 
 # Create some sample text
-text = 'Fun, fun, awesome, awesome, tubular, astounding, superb, great, amazing, amazing, amazing, amazing'
+text = df_nlp['Text_field'].tolist().split(" ")
 
 # Create and generate a word cloud image:
 wordcloud = WordCloud().generate(text)
