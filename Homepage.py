@@ -21,14 +21,14 @@ df_disease = fetch_data("select $1 from available_diseases")
 selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease['$1'].tolist())
 st.sidebar.write("Vous avez choisi : ", selected_disease)
 
-
-query = "select NCTID from MASTER_DATA WHERE disease = '" + selected_disease + "' LIMIT 10"
-data = fetch_data(query)
-
+# Dashboard - Big numbers & Metrics
+df_metrics = fetch_data("SELECT * FROM studies_count")
+df_metrics = df_metrics[df_metrics['disease'] == seleccted_disease]
 st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Total number of studies", fetch_data("SELECT count(*) FROM studies_count WHERE disease = '" + selected_disease + "'").iloc[0, 0])
-col2.metric("On-going Clinical studies", fetch_data("SELECT count(*) FROM studies_count WHERE disease = '" + selected_disease + "' AND simplifiedstatus = 'On-going'").iloc[0, 0])
-col3.metric("Completed Clinical studies", fetch_data("SELECT count(*) FROM studies_count WHERE disease = '" + selected_disease + "' AND simplifiedstatus = 'Closed'").iloc[0, 0])
-col4.metric("Number of lines", fetch_data("SELECT count(*) FROM studies_count WHERE disease = '" + selected_disease + "' AND simplifiedstatus = 'Unknown'").iloc[0, 0])
+col1.metric("Total number of studies", df_metrics['Count'].sum())
+col2.metric("On-going Clinical studies", df_metrics[df_metrics['simplifiedstatus'] == 'On-going'])
+col3.metric("Completed Clinical studies", df_metrics[df_metrics['simplifiedstatus'] == 'Closed'])
+col4.metric("Number of lines", df_metrics[df_metrics['simplifiedstatus'] == 'Unknown'])
 
+st.dataframe(df_metrics)
