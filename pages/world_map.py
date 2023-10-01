@@ -34,11 +34,6 @@ df_sites['VALUE'] = 1
 df_sites = df_sites[df_sites['DISEASE'] == selected_disease]
 
 st.title('🏥 World map of clinical studies 🧑‍⚕️')
-
-st.dataframe(df_sites)
-st.echo(df_sites.info())
-
-
 tab1, tab2, tab3 = st.tabs(["Worldmap by countries", "Sites heatmap", "Sites detailed view"])
 
 with tab1:
