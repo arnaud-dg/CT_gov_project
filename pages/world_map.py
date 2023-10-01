@@ -22,7 +22,7 @@ df_disease = fetch_data("select $1 from available_diseases")
 selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease['$1'].tolist())
 st.sidebar.write("Vous avez choisi : ", selected_disease)
 
-df_countries = fetch_data("SELECT * FROM studies_countries")
+df_countries = fetch_data("SELECT * FROM country_map")
 df_countries = df_countries[df_countries['DISEASE'] == selected_disease]
 
 st.title('🏥 World map of clinical studies 🧑‍⚕️')
