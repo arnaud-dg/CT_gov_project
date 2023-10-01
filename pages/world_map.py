@@ -28,10 +28,8 @@ df_countries = df_countries[df_countries['DISEASE'] == selected_disease]
 df_sites = fetch_data("SELECT * FROM studies_sites")
 df_sites['LATITUDE'] = df_sites['LATITUDE'].astype(str)
 df_sites['LONGITUDE'] = df_sites['LONGITUDE'].astype(str)
-df_sites['VALUE'] = "1"
+df_sites['VALUE'] = 1
 df_sites = df_sites[df_sites['DISEASE'] == selected_disease]
-
-
 
 st.title('🏥 World map of clinical studies 🧑‍⚕️')
 
