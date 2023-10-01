@@ -1,7 +1,9 @@
 import pandas as pd
 import streamlit as st
 import snowflake.connector
+import altair as alt
 
+# Importing function
 def fetch_data(SQL_query):
     # Connection to snowflake and cursor creation
     conn = snowflake.connector.connect(**st.secrets["snowflake"])
@@ -14,6 +16,7 @@ def fetch_data(SQL_query):
     conn.close()
     return df
 
+# Drop-down list of the sidebar
 df = fetch_data("select $1 from available_diseases")
 disease_list = []
 for row in df.itertuples():
@@ -28,4 +31,9 @@ query = "select NCTID from MASTER_DATA WHERE disease = " + selected_disease + " 
 data = fetch_data(query)
 
 st.title('🦜🔗 Quickstart App')
-st.dataframe(data)
+col1, col2, col3 = st.columns(3)
+col1.metric("Total number of studies", "70 °F", "1.2 °F")
+col2.metric("On-going Clinical studies", "9 mph", "-8%")
+col3.metric("Completed Clinical studies", "86%", "4%")
+
+st.dataframe(df)
