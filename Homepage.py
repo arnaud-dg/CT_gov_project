@@ -3,6 +3,14 @@ import streamlit as st
 import snowflake.connector
 import altair as alt
 
+st.markdown("""
+    <style>
+        .reportview-container .main .block-container {
+            max-width: 90%;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Importing function
 def fetch_data(SQL_query):
     # Connection to snowflake and cursor creation
@@ -25,7 +33,7 @@ st.sidebar.write("Vous avez choisi : ", selected_disease)
 query = "select NCTID from MASTER_DATA WHERE disease = '" + selected_disease + "' LIMIT 10"
 data = fetch_data(query)
 
-df = fetch_data("SELECT count(*) FROM studies_count WHERE disease = '" + selected_disease + "'")
+df = fetch_data("SELECT count(*) AS total FROM studies_count WHERE disease = '" + selected_disease + "'")
 
 st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
 col1, col2, col3, col4 = st.columns(4)
@@ -34,4 +42,4 @@ col2.metric("On-going Clinical studies", "0 mph", "-8%")
 col3.metric("Completed Clinical studies", "86%", "4%")
 col4.metric("Number of lines", "86%", "4%")
 
-st.dataframe(df)
+st.dataframe(df['total][0])
