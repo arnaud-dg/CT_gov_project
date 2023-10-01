@@ -24,7 +24,7 @@ for row in df.itertuples():
     
 # Using object notation
 selected_disease = st.sidebar.selectbox(
-    "Please select a disease :", disease_list
+    "Please select a disease :", df['$1'].tolist()
 )
 
 # query = "select NCTID from MASTER_DATA WHERE disease = " + selected_disease + " LIMIT 10"
