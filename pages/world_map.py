@@ -2,6 +2,7 @@ import pandas as pd
 import streamlit as st
 import snowflake.connector
 import altair as alt
+import plotly.express as px
 
 # Importing function
 def fetch_data(SQL_query):
@@ -26,4 +27,12 @@ df_countries = df_countries[df_countries['DISEASE'] == selected_disease]
 
 st.title('🏥 World map of clinical studies 🧑‍⚕️')
 
-st.dataframe(df_countries)
+# st.dataframe(df_countries)
+
+fig = px.choropleth(df_countries, locations="COUNTRYCODE",
+                    color="NUMBERSTUDIES", # lifeExp is a column of gapminder
+                    hover_name="LOCATIONCOUNTRY", # column to add to hover information
+                    color_continuous_scale=px.colors.sequential.Plasma)
+fig.update_layout(mapbox_style="open-street-map")
+fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+st.plotly_chart(fig)
