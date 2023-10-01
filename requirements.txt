@@ -3,3 +3,4 @@ streamlit
 openai
 langchain
 snowflake-connector-python
+plotly-express
