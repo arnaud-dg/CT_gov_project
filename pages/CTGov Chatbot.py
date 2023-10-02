@@ -5,6 +5,7 @@ import snowflake.connector
 import altair as alt
 import plotly.express as px
 import leafmap.foliumap as leafmap
+import OS
 
 # Importing function
 def fetch_data(SQL_query):
@@ -24,7 +25,8 @@ df_disease = fetch_data("select $1 from available_diseases")
 selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease['$1'].tolist())
 st.sidebar.write("Vous avez choisi : ", selected_disease)
 
-openai.api_key = st.secrets['openai']["OPENAI_API_KEY"]
+
+os.environ["OPENAI_API_KEY"] = st.secrets['openai']["OPENAI_API_KEY"]
 
 completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
