@@ -9,7 +9,6 @@ from streamlit_extras.metric_cards import style_metric_cards
 st.set_page_config(layout="wide")
 add_logo("gallery/transparent_logo_DATA_BOOST_2.png", height=300)
 
-@extra
 def style_metric_cards(
     background_color: str = "#FFF",
     border_size_px: int = 1,
