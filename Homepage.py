@@ -3,6 +3,8 @@ import streamlit as st
 import snowflake.connector
 import altair as alt
 
+st.set_page_config(layout="wide")
+
 # Importing function
 def fetch_data(SQL_query):
     # Connection to snowflake and cursor creation
