@@ -33,10 +33,11 @@ st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
 df_metrics = fetch_data("SELECT * FROM studies_count")
 df_metrics = df_metrics[df_metrics['DISEASE'] == selected_disease]
 col1, col2, col3, col4 = st.columns(4)
+style_metric_cards(background_color = '#FFF', border_size_px = 1, border_color = '#CCC', border_radius_px = 5, border_left_color = '#AED2FF', box_shadow = True)
 col1.metric("Total number of studies", df_metrics['COUNT'].sum())
 col2.metric("On-going Clinical studies", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'On-going']['COUNT'].sum())
 col3.metric("Completed Clinical studies", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'Closed']['COUNT'].sum())
 col4.metric("Number of lines", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'Unknown']['COUNT'].sum())
-style_metric_cards(background_color = '#FFF', border_size_px = 1, border_color = '#CCC', border_radius_px = 5, border_left_color = '#AED2FF', box_shadow = True)
+
 
 
