@@ -4,6 +4,7 @@ import snowflake.connector
 import altair as alt
 from streamlit_extras.app_logo import add_logo
 from streamlit_extras.metric_cards import style_metric_cards
+from streamlit_extras import extra
 
 # Layout of the main page
 st.set_page_config(layout="wide")
