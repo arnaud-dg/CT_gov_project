@@ -41,6 +41,6 @@ col1.metric("Total number of studies", df_metrics['COUNT'].sum())
 col2.metric("On-going Clinical studies", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'On-going']['COUNT'].sum())
 col3.metric("Completed Clinical studies", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'Closed']['COUNT'].sum())
 col4.metric("Number of lines", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'Unknown']['COUNT'].sum())
-style_metric_cards()
+style_metric_cards(border_left_color:"#9AD8E1")
 
 
