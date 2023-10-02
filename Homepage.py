@@ -24,6 +24,9 @@ def fetch_data(SQL_query):
 
 # Drop-down list of the sidebar
 df_disease = fetch_data("select $1 from available_diseases")
+st.write("This web application, made with Streamlit, is a personal project I undertook to practice with AWS, Snowflake, SQL, and Python. 
+The aim of this application is to provide a synthetic analysis of past and ongoing clinical studies for a given pathology. 
+To limit the data volume, only a few pathologies have been set up. The data comes from the Clinicaltrials.gov API. Enjoy the journey!")
 selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease['$1'].tolist())
 
 st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
