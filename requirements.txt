@@ -7,4 +7,3 @@ plotly-express
 plotly
 leafmap
 wordcloud
-os
