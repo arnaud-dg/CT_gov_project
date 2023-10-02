@@ -3,10 +3,11 @@ import streamlit as st
 import snowflake.connector
 import altair as alt
 from streamlit_extras.app_logo import add_logo
+from streamlit_extras.metric_cards import style_metric_cards
 
 # Layout of the main page
 st.set_page_config(layout="wide")
-add_logo("gallery/kitty.jpeg", height=300)
+add_logo("gallery/transparent_logo_DATA_BOOST.png", height=300)
 
 # Importing function
 def fetch_data(SQL_query):
@@ -36,5 +37,6 @@ col1.metric("Total number of studies", df_metrics['COUNT'].sum())
 col2.metric("On-going Clinical studies", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'On-going']['COUNT'].sum())
 col3.metric("Completed Clinical studies", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'Closed']['COUNT'].sum())
 col4.metric("Number of lines", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'Unknown']['COUNT'].sum())
+style_metric_cards(background_color: str = '#FFF', border_size_px: int = 1, border_color: str = '#CCC', border_radius_px: int = 5, border_left_color: str = '#AED2FF', box_shadow: bool = True)
 
 
