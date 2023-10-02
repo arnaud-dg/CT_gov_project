@@ -46,7 +46,7 @@ with tab1:
     st.plotly_chart(fig)
 
 with tab2:
-    m = leafmap.Map(center=[0, 0], zoom=2, tiles="stamentoner")
+    m = leafmap.Map(center=[0, 0], zoom=2, tiles="Stamen Terrain")
     m.add_heatmap(
         df_sites,
         latitude="LATITUDE",
