@@ -24,7 +24,7 @@ df_disease = fetch_data("select $1 from available_diseases")
 selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease['$1'].tolist())
 st.sidebar.write("Vous avez choisi : ", selected_disease)
 
-openai.api_key = st.secrets.OPENAI_API_KEY
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
@@ -35,19 +35,19 @@ completion = openai.ChatCompletion.create(
 
 st.write(completion.choices[0].message.content)
 
-import openai
-import re
-import streamlit as st
-from prompts import get_system_prompt
+# import openai
+# import re
+# import streamlit as st
+# from prompts import get_system_prompt
 
-st.title("☃️ Frosty")
+# st.title("☃️ Frosty")
 
-# Initialize the chat messages history
-openai.api_key = st.secrets["OPENAI_API_KEY"]
-if "messages" not in st.session_state:
-    # system prompt includes table information, rules, and prompts the LLM to produce
-    # a welcome message to the user.
-    st.session_state.messages = [{"role": "system", "content": get_system_prompt()}]
+# # Initialize the chat messages history
+# openai.api_key = st.secrets["OPENAI_API_KEY"]
+# if "messages" not in st.session_state:
+#     # system prompt includes table information, rules, and prompts the LLM to produce
+#     # a welcome message to the user.
+#     st.session_state.messages = [{"role": "system", "content": get_system_prompt()}]
 
 # # Prompt for user input and save
 # if prompt := st.chat_input():
