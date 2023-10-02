@@ -7,7 +7,7 @@ from streamlit_extras.metric_cards import style_metric_cards
 
 # Layout of the main page
 st.set_page_config(layout="wide")
-add_logo("gallery/transparent_logo_DATA_BOOST_2.png", height=120)
+add_logo("gallery/transparent_logo_DATA_BOOST_2.png", height=300)
 
 # Importing function
 def fetch_data(SQL_query):
