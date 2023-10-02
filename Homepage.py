@@ -2,8 +2,11 @@ import pandas as pd
 import streamlit as st
 import snowflake.connector
 import altair as alt
+from streamlit_extras.app_logo import add_logo
 
+# Layout of the main page
 st.set_page_config(layout="wide")
+add_logo("gallery/kitty.jpeg", height=300)
 
 # Importing function
 def fetch_data(SQL_query):
