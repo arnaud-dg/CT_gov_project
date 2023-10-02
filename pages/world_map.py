@@ -57,7 +57,7 @@ with tab2:
     m.to_streamlit(height=700)
 
 with tab3:
-    m2 = leafmap.Map(center=[0, 0], zoom=2, tiles="stamentoner")
+    m2 = leafmap.Map(center=[0, 0], zoom=2, tiles="Stamen Terrain")
     m2.add_points_from_xy(
         df_sites,
         x="LATITUDE",
