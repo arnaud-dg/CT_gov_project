@@ -7,7 +7,7 @@ from streamlit_extras.metric_cards import style_metric_cards
 
 # Layout of the main page
 st.set_page_config(layout="wide")
-add_logo("gallery/transparent_logo_DATA_BOOST_2.png", height=300)
+add_logo("gallery/transparent_logo_DATA_BOOST_2.png", width=300)
 
 # Importing function
 def fetch_data(SQL_query):
@@ -25,7 +25,6 @@ def fetch_data(SQL_query):
 # Drop-down list of the sidebar
 df_disease = fetch_data("select $1 from available_diseases")
 selected_disease = st.sidebar.selectbox("Please select a disease :", df_disease['$1'].tolist())
-st.sidebar.write("Vous avez choisi : ", selected_disease)
 
 st.title('🏥 Clinical Trials .Gov Explorer 🧑‍⚕️')
 
