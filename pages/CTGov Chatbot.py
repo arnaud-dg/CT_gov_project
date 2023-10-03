@@ -38,5 +38,8 @@ if prompt := st.chat_input("What is up?"):
     st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 conn = snowflake.connector.connect(**st.secrets["snowflake"])
-df = conn.query("select current_warehouse()")
+cur = conn.cursor()
+cur.execute("select current_warehouse()")
+# Loading Data into a DataFrame
+df = pd.DataFrame.from_records(iter(cur), columns=[x[0] for x in cur.description])
 st.write(df)
