@@ -4,7 +4,7 @@ import snowflake.connector
 import pandas as pd
 # from prompts import get_system_prompt
 
-QUALIFIED_TABLE_NAME = "FROSTY_SAMPLE.CYBERSYN_FINANCIAL.FINANCIAL_ENTITY_ANNUAL_TIME_SERIES"
+QUALIFIED_TABLE_NAME = "CT_GOV.API_QUERIES"
 TABLE_DESCRIPTION = """
 This table has various metrics for financial entities (also referred to as banks) since 1983.
 The user may describe the entities interchangeably as banks, financial institutions, or financial entities.
