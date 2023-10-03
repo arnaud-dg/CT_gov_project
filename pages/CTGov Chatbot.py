@@ -49,7 +49,6 @@ Now to get started, please briefly introduce yourself, describe the table at a h
 Then provide 3 example questions using bullet points.
 """
 
-@st.cache_data(show_spinner=False)
 def get_table_context(table_name: str, table_description: str, metadata_query: str = None):
     table = table_name.split(".")
     conn = st.experimental_connection("snowpark")
