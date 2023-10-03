@@ -1,5 +1,6 @@
 import openai
 import streamlit as st
+import snowflake.connector
 
 with st.sidebar:
     st.title('🤖💬 OpenAI Chatbot')
