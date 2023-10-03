@@ -51,6 +51,7 @@ Then provide 3 example questions using bullet points.
 
 def get_table_context(table_name: str, table_description: str, metadata_query: str = None):
     table = table_name.split(".")
+    st.echo(table)
     # conn = st.experimental_connection("snowpark")
     conn = snowflake.connector.connect(**st.secrets["snowflake"])
     # cur.execute(SQL_query)
