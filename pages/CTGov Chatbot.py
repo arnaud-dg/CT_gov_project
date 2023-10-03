@@ -62,7 +62,7 @@ def get_table_context(table_name: str, table_description: str, metadata_query: s
         SELECT COLUMN_NAME, DATA_TYPE FROM {table[0].upper()}.INFORMATION_SCHEMA.COLUMNS
         WHERE TABLE_SCHEMA = '{table[1].upper()}' AND TABLE_NAME = '{table[2].upper()}'
         """,
-    )
+    ).fetchone()
     columns = "\n".join(
         [
             f"- **{columns['COLUMN_NAME'][i]}**: {columns['DATA_TYPE'][i]}"
