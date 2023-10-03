@@ -2,7 +2,7 @@ import openai
 import streamlit as st
 import snowflake.connector
 import pandas as pd
-from prompts import get_system_prompt
+from .prompts import get_system_prompt
 
 st.title("☃️ Frosty")
 
