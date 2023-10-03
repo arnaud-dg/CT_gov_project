@@ -2,8 +2,6 @@ import openai
 import streamlit as st
 import snowflake.connector
 import pandas as pd
-import sys
-sys.path.append("./")
 from llm-chatbot.prompts import get_system_prompt
 
 st.title("☃️ Frosty")
