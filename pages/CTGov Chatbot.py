@@ -51,9 +51,18 @@ Then provide 3 example questions using bullet points.
 
 def get_table_context(table_name: str, table_description: str, metadata_query: str = None):
     table = table_name.split(".")
-    conn = snowflake.connector.connect(**st.secrets["snowflake"])
     # conn = st.experimental_connection("snowpark")
-    columns = conn.query("SELECT COLUMN_NAME, DATA_TYPE FROM {table[0].upper()}.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = '{table[1].upper()}' AND TABLE_NAME = '{table[2].upper()}'")
+    conn = snowflake.connector.connect(**st.secrets["snowflake"])
+    column = conn.cursor()
+    # cur.execute(SQL_query)
+    # # Loading Data into a DataFrame
+    # df = pd.DataFrame.from_records(iter(cur), columns=[x[0] for x in cur.description])
+    
+    columns.execute(f"""
+        SELECT COLUMN_NAME, DATA_TYPE FROM {table[0].upper()}.INFORMATION_SCHEMA.COLUMNS
+        WHERE TABLE_SCHEMA = '{table[1].upper()}' AND TABLE_NAME = '{table[2].upper()}'
+        """,
+    )
     columns = "\n".join(
         [
             f"- **{columns['COLUMN_NAME'][i]}**: {columns['DATA_TYPE'][i]}"
