@@ -2,45 +2,49 @@ import openai
 import streamlit as st
 import snowflake.connector
 import pandas as pd
+from llm-chatbot.prompts import get_system_prompt
 
-with st.sidebar:
-    st.title('🤖💬 OpenAI Chatbot')
-    if 'OPENAI_API_KEY' in st.secrets:
-        st.success('API key already provided!', icon='✅')
-        openai.api_key = st.secrets['OPENAI_API_KEY']
-    else:
-        openai.api_key = st.text_input('Enter OpenAI API token:', type='password')
-        if not (openai.api_key.startswith('sk-') and len(openai.api_key)==51):
-            st.warning('Please enter your credentials!', icon='⚠️')
-        else:
-            st.success('Proceed to entering your prompt message!', icon='👉')
+st.title("☃️ Frosty")
 
+# Initialize the chat messages history
+openai.api_key = st.secrets['OPENAI_API_KEY']
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+    # system prompt includes table information, rules, and prompts the LLM to produce
+    # a welcome message to the user.
+    st.session_state.messages = [{"role": "system", "content": get_system_prompt()}]
 
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-if prompt := st.chat_input("What is up?"):
+# Prompt for user input and save
+if prompt := st.chat_input():
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
-    with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        full_response = ""
-        for response in openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[{"role": m["role"], "content": m["content"]}
-                      for m in st.session_state.messages], stream=True):
-            full_response += response.choices[0].delta.get("content", "")
-            message_placeholder.markdown(full_response + "▌")
-        message_placeholder.markdown(full_response)
-    st.session_state.messages.append({"role": "assistant", "content": full_response})
 
-conn = snowflake.connector.connect(**st.secrets["snowflake"])
-cur = conn.cursor()
-cur.execute("select current_warehouse()")
-# Loading Data into a DataFrame
-df = pd.DataFrame.from_records(iter(cur), columns=[x[0] for x in cur.description])
-st.write(df)
+# display the existing chat messages
+for message in st.session_state.messages:
+    if message["role"] == "system":
+        continue
+    with st.chat_message(message["role"]):
+        st.write(message["content"])
+        if "results" in message:
+            st.dataframe(message["results"])
+
+# If last message is not from assistant, we need to generate a new response
+if st.session_state.messages[-1]["role"] != "assistant":
+    with st.chat_message("assistant"):
+        response = ""
+        resp_container = st.empty()
+        for delta in openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": m["role"], "content": m["content"]} for m in st.session_state.messages],
+            stream=True,
+        ):
+            response += delta.choices[0].delta.get("content", "")
+            resp_container.markdown(response)
+
+        message = {"role": "assistant", "content": response}
+        # Parse the response for a SQL query and execute if available
+        sql_match = re.search(r"```sql\n(.*)\n```", response, re.DOTALL)
+        if sql_match:
+            sql = sql_match.group(1)
+            conn = st.experimental_connection("snowpark")
+            message["results"] = conn.query(sql)
+            st.dataframe(message["results"])
+        st.session_state.messages.append(message)
