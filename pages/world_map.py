@@ -4,6 +4,7 @@ import snowflake.connector
 import altair as alt
 import plotly.express as px
 import leafmap.foliumap as leafmap
+import geopandas as gpd
 
 # Importing function
 def fetch_data(SQL_query):
@@ -33,34 +34,77 @@ df_sites = df_sites[df_sites['LONGITUDE'].isna() == False]
 df_sites['VALUE'] = 1
 df_sites = df_sites[df_sites['DISEASE'] == selected_disease]
 
+st.dataframe(df_countries)
+
 st.title('🏥 World map of clinical studies 🧑‍⚕️')
 tab1, tab2, tab3 = st.tabs(["Worldmap by countries", "Sites heatmap", "Sites detailed view"])
 
-with tab1:
-    fig = px.choropleth(df_countries, locations="COUNTRY_CODE_ISO",
-                        color="NUMBER_STUDIES", # lifeExp is a column of gapminder
-                        hover_name="LOCATIONCOUNTRY", # column to add to hover information
-                        color_continuous_scale=px.colors.sequential.Plasma)
-    fig.update_layout(mapbox_style="open-street-map")
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-    st.plotly_chart(fig)
+gdf = gpd.read_file('shapefiles/world-administrative-boundaries/world-administrative-boundaries.shp')
 
-with tab2:
-    m = leafmap.Map(center=[0, 0], zoom=2, tiles="Stamen Terrain")
-    m.add_heatmap(
+mymap = folium.Map(location=[19.0649070739746, 73.1308670043945], zoom_start=2, tiles=None)
+choropleth = folium.Choropleth(
+    geo_data=gdf,
+    data=df,
+    key_on='feature.properties.iso3',
+    columns=['Country Name', '2020'], #the first one is the 'index' which needs to be connected with the 'key_on' property of  the geo_data
+    name = 'GDP per capita (Constant USD 2015 )',
+    fill_color='YlGn', fill_opacity=0.7, line_opacity=0.5).add_to(mymap)
+
+with tab1:
+    m1 = leafmap.Map(center=[0, 0], zoom=2, tiles="None")
+    choropleth = folium.Choropleth(
+    geo_data=gdf,
+    data=df_countries,
+    key_on='feature.properties.name',
+    columns=['Country Name', '2020'], #the first one is the 'index' which needs to be connected with the 'key_on' property of  the geo_data
+    name = 'GDP per capita (Constant USD 2015 )',
+    fill_color='YlGn',
+        fill_opacity=0.7,
+    line_opacity=0.5,
+).add_to(mymap)
+    m1.add_heatmap(
         df_sites,
         latitude="LATITUDE",
         longitude="LONGITUDE",
         value="VALUE",
         radius=10,
     )
-    m.to_streamlit(height=700)
+    m1.to_streamlit(height=700)
+
+    
+    # fig = px.choropleth(df_countries, locations="COUNTRY_CODE_ISO",
+    #                     color="NUMBER_STUDIES", # lifeExp is a column of gapminder
+    #                     hover_name="LOCATIONCOUNTRY", # column to add to hover information
+    #                     color_continuous_scale=px.colors.sequential.Plasma)
+    # fig.update_layout(mapbox_style="open-street-map")
+    # fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    # st.plotly_chart(fig)
+    # m1 = leafmap.Map(center=[0, 0], zoom=2, tiles="Stamen Terrain")
+    # m1.add_heatmap(
+    #     df_sites,
+    #     latitude="LATITUDE",
+    #     longitude="LONGITUDE",
+    #     value="VALUE",
+    #     radius=10,
+    # )
+    # m1.to_streamlit(height=700)
+
+with tab2:
+    m2 = leafmap.Map(center=[0, 0], zoom=2, tiles="Stamen Terrain")
+    m2.add_heatmap(
+        df_sites,
+        latitude="LATITUDE",
+        longitude="LONGITUDE",
+        value="VALUE",
+        radius=10,
+    )
+    m2.to_streamlit(height=700)
 
 with tab3:
-    m2 = leafmap.Map(center=[0, 0], zoom=2, tiles="Stamen Terrain")
-    m2.add_points_from_xy(
+    m3 = leafmap.Map(center=[0, 0], zoom=2, tiles="Stamen Terrain")
+    m3.add_points_from_xy(
         df_sites,
         y="LATITUDE",
         x="LONGITUDE"
     )
-    m2.to_streamlit(height=700)
+    m3.to_streamlit(height=700)
