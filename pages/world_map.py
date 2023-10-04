@@ -64,3 +64,17 @@ with tab3:
         x="LONGITUDE"
     )
     m2.to_streamlit(height=700)
+
+# Inject JavaScript to get the container width and display it in a hidden div
+st.markdown("""
+    <div id="containerWidth" style="display: none;"></div>
+    <script>
+        document.getElementById("containerWidth").textContent = document.querySelector(".stApp > .main > .block-container").offsetWidth;
+    </script>
+""", unsafe_allow_html=True)
+
+# Retrieve the container width using Streamlit
+container_width = st.empty()
+
+# Display the container width
+st.write(f"Container width: {container_width.text()} pixels")
