@@ -8,7 +8,7 @@ from streamlit_extras import extra
 
 # Layout of the main page
 st.set_page_config(layout="wide")
-add_logo("gallery/transparent_logo_DATA_BOOST_2.png", height=300)
+add_logo("gallery/transparent_logo_DATA_BOOST.png", height=300)
 
 # Importing function
 def fetch_data(SQL_query):
