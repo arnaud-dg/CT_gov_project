@@ -44,3 +44,20 @@ col3.metric("Completed Clinical studies", df_metrics[df_metrics['SIMPLIFIEDSTATU
 col4.metric("Number of lines", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'Unknown']['COUNT'].sum())
 #style_metric_cards(background_color='#FFF', border_size_px=1, border_color='#CCC', border_radius_px=5, border_left_color="#9AD8E1")
 style_metric_cards()
+
+# Dashboard - Plotly charts
+# Study count (per phase)
+df_chart1 = fetch_data("SELECT * FROM studies_count")
+df_chart1 = df_chart1[df_chart1['DISEASE'] == selected_disease]
+
+# Enrolment count (per phase)
+df_chart2 = fetch_data("SELECT * FROM studies_count")
+df_chart2 = df_chart2[df_chart2['DISEASE'] == selected_disease]
+
+# Pie chart by therapeutic family
+df_chart3 = fetch_data("SELECT * FROM studies_count")
+df_chart3 = df_chart3[df_chart3['DISEASE'] == selected_disease]
+
+# Pie chart by status
+df_chart4 = fetch_data("SELECT * FROM studies_count")
+df_chart4 = df_chart4[df_chart4['DISEASE'] == selected_disease]
