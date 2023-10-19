@@ -45,6 +45,8 @@ col4.metric("Number of lines", df_metrics[df_metrics['SIMPLIFIEDSTATUS'] == 'Unk
 #style_metric_cards(background_color='#FFF', border_size_px=1, border_color='#CCC', border_radius_px=5, border_left_color="#9AD8E1")
 style_metric_cards()
 
+st.dataframe(df_metrics)
+
 # Dashboard - Plotly charts
 # Study count (per phase)
 df_chart1 = fetch_data("SELECT * FROM studies_count")
